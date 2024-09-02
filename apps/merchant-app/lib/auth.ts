@@ -1,6 +1,8 @@
 import GoogleProvider from "next-auth/providers/google";
 import db from "@repo/db/client";
 
+
+//testing CI workflow
 export const authOptions = {
     providers: [
         GoogleProvider({
