@@ -25,3 +25,18 @@ jobs:
         file: ./docker/Dockerfile.user
         push: true
         tags: ashutosh435/money-minded-wallet:latest 
+
+    - name: Verify Pushed Image
+      run: docker pull ashutosh435/money-minded-wallet:latest
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          sudo docker pull ashutosh435/money-minded-wallet:latest
+          sudo docker stop money-minded-wallet || true
+          sudo docker rm money-minded-wallet || true
+          sudo docker run -d --name money-minded-wallet -p 3005:3000 ashutosh435/money-minded-wallet:latest
