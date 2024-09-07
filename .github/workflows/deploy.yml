@@ -40,4 +40,4 @@ jobs:
           sudo docker pull ashutosh435/money-minded-wallet:latest
           sudo docker stop money-minded-wallet || true
           sudo docker rm money-minded-wallet || true
-          sudo docker run -e DATABASE_URL="${{ secrets.DATABASE_URL }}" -d --name money-minded-wallet -p 3005:3000 ashutosh435/money-minded-wallet:latest
+          sudo docker run -e DATABASE_URL="${{ secrets.DATABASE_URL }}" --restart unless-stopped -d --name money-minded-wallet -p 3005:3000 ashutosh435/money-minded-wallet:latest
