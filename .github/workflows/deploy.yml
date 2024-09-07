@@ -36,8 +36,6 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          sudo docker stop money-minded-wallet || true
-          sudo docker rm money-minded-wallet || true
           sudo docker system prune --all --force || true
           sudo docker pull ashutosh435/money-minded-wallet:latest
           sudo docker run -e DATABASE_URL ${{ SECRETS.DATABASE_URL }} -d --name money-minded-wallet -p 3005:3000 ashutosh435/money-minded-wallet:latest
